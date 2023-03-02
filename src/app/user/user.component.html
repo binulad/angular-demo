@@ -1,0 +1,7 @@
+<!-- User Details -->
+<section>
+  <app-section-header [sectionTitle]="sectionTitle" [isShowLanguage]="true"></app-section-header>
+  <app-user-details (userData)="getUserData($event)"></app-user-details>
+</section>
+<!-- End: User Details -->
+<app-user-bio></app-user-bio>

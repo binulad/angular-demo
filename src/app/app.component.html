@@ -1,3 +1,18 @@
-<app-header></app-header>
-
-<router-outlet></router-outlet>
+<main class="grid gap-0">
+  <section class="g-col-6">
+    <app-header [userName]="userName"></app-header>
+    <div class="p-4">
+      <app-user (userData)="getUserData($event)"></app-user>
+    </div>
+  </section>
+  <section class="g-col-6 border-start bg-light">
+    <div class="page p-4 m-4 h-100 bg-white">
+      <!-- Header -->
+      <h4 class="m-0">{{userData.firstName}} {{userData.lastName}}</h4>
+      <p class="small text-muted">{{userData.jobTitle}}</p>
+    </div>
+    <div class="action-area p-4 border-top d-flex">
+      <button type="button" class="ms-auto btn btn-primary">Download</button>
+    </div>
+  </section>
+</main>
