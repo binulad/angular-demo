@@ -7,7 +7,6 @@ import { User } from './user/user.model';
 })
 export class AppComponent {
   title = 'angular-demo';
-  userName: string = 'Untitled';
   userData: User = {
     jobTitle: '',
     firstName: '',
@@ -17,6 +16,5 @@ export class AppComponent {
 
   getUserData(userData: User) {
     this.userData = userData;
-    this.userName = userData.firstName;
   }
 }

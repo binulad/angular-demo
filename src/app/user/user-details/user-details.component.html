@@ -1,21 +1,21 @@
 <!-- User Details Form -->
-<form [formGroup]="userDetailsForm" class="row g-3 my-3">
-  <div class="col-12">
+<form [formGroup]="userDetailsForm" class="grid g-3 my-3">
+  <div class="g-col-12">
     <label for="jobTitle" class="form-label">Job Title</label>
     <select id="jobTitle" name="jobTitle" (change)="onChangeJobTitle(userDetailsForm.value.jobTitle)" formControlName="jobTitle" class="form-select">
       <option selected>Select Job Title</option>
       <option *ngFor="let item of jobTitleList" [value]="item.id">{{item.name}}</option>
     </select>
   </div>
-  <div class="col-md-6">
+  <div class="g-col-6">
     <label for="firstName" class="form-label">First Name</label>
     <input type="text" name="firstName" formControlName="firstName" (keyup)="onChangeInput()" class="form-control" id="firstName" placeholder="Enter First Name">
   </div>
-  <div class="col-md-6">
+  <div class="g-col-6">
     <label for="lastName" class="form-label">Last Name</label>
     <input type="text" name="lastName" formControlName="lastName" (keyup)="onChangeInput()" class="form-control" id="lastName" placeholder="Enter Last Name">
   </div>
-  <div class="col-12">
+  <div class="g-col-12">
     <label for="emailAddress" class="form-label">Email Address</label>
     <input type="email" name="emailAddress" formControlName="emailAddress" (keyup)="onChangeInput()" class="form-control" id="emailAddress" placeholder="Enter Email Address">
   </div>
