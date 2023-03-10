@@ -11,6 +11,8 @@ export class UserDetailsComponent {
 
   @Output() userData: EventEmitter<any> = new EventEmitter<any>();
 
+  public editAdditionalInfo: boolean = false;
+
   jobTitleList = [
     {
       id: 1,
@@ -28,6 +30,11 @@ export class UserDetailsComponent {
       firstName: new FormControl(),
       lastName: new FormControl(),
       emailAddress: new FormControl(),
+      phoneNumber: new FormControl(),
+      address: new FormControl(),
+      pinCode: new FormControl(),
+      state: new FormControl(),
+      country: new FormControl()
     });
   }
 
@@ -57,5 +64,9 @@ export class UserDetailsComponent {
         break;
     }
     this.userData.emit(this.userDetailsForm.value);
+  }
+
+  clickAdditionalInfo() {
+    this.editAdditionalInfo = !this.editAdditionalInfo;
   }
 }

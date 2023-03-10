@@ -5,6 +5,6 @@ import { Component, Input } from '@angular/core';
   templateUrl: './header.component.html',
 })
 export class HeaderComponent {
-  @Input() userName: string = 'Untitled';
-  @Input() jobTitle: string = 'Job Title';
+  @Input() userName!: string;
+  @Input() jobTitle!: string;
 }

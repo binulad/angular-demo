@@ -1,25 +1,142 @@
 <!-- User Details Form -->
 <form [formGroup]="userDetailsForm" class="grid g-3 my-3">
+  <!-- Job Title -->
   <div class="g-col-12">
     <label for="jobTitle" class="form-label">Job Title</label>
-    <select id="jobTitle" name="jobTitle" (change)="onChangeJobTitle(userDetailsForm.value.jobTitle)" formControlName="jobTitle" class="form-select">
+    <select
+      id="jobTitle"
+      name="jobTitle"
+      (change)="onChangeJobTitle(userDetailsForm.value.jobTitle)"
+      formControlName="jobTitle"
+      class="form-select"
+    >
       <option selected>Select Job Title</option>
-      <option *ngFor="let item of jobTitleList" [value]="item.id">{{item.name}}</option>
+      <option *ngFor="let item of jobTitleList" [value]="item.id">
+        {{ item.name }}
+      </option>
     </select>
   </div>
+  <!-- End: Job Title -->
+
+  <!-- First Name -->
   <div class="g-col-6">
     <label for="firstName" class="form-label">First Name</label>
-    <input type="text" name="firstName" formControlName="firstName" (keyup)="onChangeInput()" class="form-control" id="firstName" placeholder="Enter First Name">
+    <input
+      type="text"
+      name="firstName"
+      formControlName="firstName"
+      (keyup)="onChangeInput()"
+      class="form-control"
+      id="firstName"
+      placeholder="Enter First Name"
+    />
   </div>
+  <!-- End: First Name -->
+
+  <!-- Last Name -->
   <div class="g-col-6">
     <label for="lastName" class="form-label">Last Name</label>
-    <input type="text" name="lastName" formControlName="lastName" (keyup)="onChangeInput()" class="form-control" id="lastName" placeholder="Enter Last Name">
+    <input
+      type="text"
+      name="lastName"
+      formControlName="lastName"
+      (keyup)="onChangeInput()"
+      class="form-control"
+      id="lastName"
+      placeholder="Enter Last Name"
+    />
   </div>
+  <!-- End: Last Name -->
+
+  <!-- Email Address -->
   <div class="g-col-12">
     <label for="emailAddress" class="form-label">Email Address</label>
-    <input type="email" name="emailAddress" formControlName="emailAddress" (keyup)="onChangeInput()" class="form-control" id="emailAddress" placeholder="Enter Email Address">
+    <input
+      type="email"
+      name="emailAddress"
+      formControlName="emailAddress"
+      (keyup)="onChangeInput()"
+      class="form-control"
+      id="emailAddress"
+      placeholder="Enter Email Address"
+    />
   </div>
+  <!-- End: Email Address -->
+
+  <div class="grid g-col-12" *ngIf="editAdditionalInfo">
+    <!-- Address -->
+    <div class="g-col-12">
+      <label for="address" class="form-label">Address</label>
+      <textarea
+        name="address"
+        id="address"
+        rows="4"
+        class="form-control"
+        placeholder="Enter the Address"
+        formControlName="address"
+      ></textarea>
+    </div>
+    <!-- End: Address -->
+
+    <!-- Pin code -->
+    <div class="g-col-6">
+      <label for="pinCode" class="form-label">Pin Code</label>
+      <input
+        type="text"
+        name="pinCode"
+        class="form-control"
+        id="pinCode"
+        formControlName="pinCode"
+        placeholder="Enter Pin Code"
+      />
+    </div>
+    <!-- End: Pin code -->
+
+    <!-- Phone Number -->
+    <div class="g-col-6">
+      <label for="phoneNumber" class="form-label">Phone Number</label>
+      <input
+        type="number"
+        name="phoneNumber"
+        formControlName="phoneNumber"
+        class="form-control"
+        id="phoneNumber"
+        placeholder="Enter Phone Number"
+      />
+    </div>
+    <!-- End: Phone Number -->
+
+    <!-- State -->
+    <div class="g-col-6">
+      <label for="state" class="form-label">State</label>
+      <select id="state" name="state" class="form-select" formControlName="state">
+        <option selected>Select State</option>
+      </select>
+    </div>
+    <!-- End: State -->
+
+    <!-- Country -->
+    <div class="g-col-6">
+      <label for="country" class="form-label">Country</label>
+      <select id="country" name="country" class="form-select" formControlName="country">
+        <option selected>Select Country</option>
+      </select>
+    </div>
+    <!-- End: Country -->
+  </div>
+
+  <!-- Additional Info Link -->
+  <div class="g-col-12">
+    <a
+      href="#"
+      (click)="clickAdditionalInfo()"
+      class="font-weight-bold text-warning"
+      >{{ editAdditionalInfo ? "Hide" : "Edit" }} additional info
+      <span class="bi bi-chevron-down" [class.rotate]="editAdditionalInfo"></span
+    ></a>
+  </div>
+  <!-- End: Additional Info Link -->
 </form>
 
-{{userDetailsForm.value.firstName}}
+{{ userDetailsForm.value.firstName }}
 <!-- End: User Details Form -->
