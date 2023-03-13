@@ -39,7 +39,6 @@ export class AppComponent implements OnInit {
   // userData!: User;
 
   constructor() {
-    debugger
     this.userData = {
       jobTitle: 'Job Title',
       firstName: 'First Name',

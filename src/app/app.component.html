@@ -1,36 +1,58 @@
 <main class="grid gap-0 h-100">
   <section class="g-col-6">
-    <app-header [userName]="userName" [jobTitle]="userData.jobTitle"></app-header>
+    <app-header
+      [userName]="userName"
+      [jobTitle]="userData.jobTitle"
+    ></app-header>
     <div class="p-4">
       <app-user (userData)="getUserData($event)"></app-user>
       <app-home [msg]="userData.firstName"></app-home>
     </div>
   </section>
   <section class="g-col-6 border-start bg-light grid gap-0 overflow-hidden">
-    <div class="page-wrapper m-4 g-col-12" #pdfWrapper>
-      <div class="page h-100 bg-white p-4">
-        <div class="grid">
-          <div class="g-col-6 align-self-center">
-            <!-- Header -->
-            <h4 class="m-0">{{userName}}</h4>
-            <p class="small text-muted">{{userData.jobTitle}}</p>
-          </div>
-          <div class="g-col-6">
-            <div class="address mb-3">
-              {{userData.address}} <br>
-              {{userData.pinCode}} <br>
-              Your State, Your Country
-            </div>
-            <div class="contact-info">
-              <p class="phone-number m-0">(123)-456-7890</p>
-              <p class="email m-0">info@example.com</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <!-- Table -->
+    <style>
+      @media print {
+        p {
+          font-size: 28px;
+        }
+      }
+      @page {
+        padding-top: 0.2em;
+        padding-bottom: 0.2em;
+        /* Letter */
+        size: us-letter;
+        margin: 1in;
+      }
+    </style>
+    <table class="table g-col-12 bg-white m-4" #pdfWrapper aria-describedby="Resume Table">
+      <tbody>
+        <tr>
+          <td style="font-size: 28px; font-weight: 700">
+            {{ userName }}
+            <p class="fs-3 fw-semibold mb-0">{{ userName }}</p>
+            <p class="fs-5 text-muted mb-0">{{ userData.jobTitle }}</p>
+          </td>
+          <td>
+            {{ userData.address }}<br />
+            {{ userData.pinCode }}
+            Your State, Your Country
+            <br /><br />
+            (123)-456-7890 info@example.com
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- Table -->
+
     <div class="action-area p-4 border-top d-flex g-col-12">
-      <button type="button" class="ms-auto btn btn-primary" (click)="downloadPdf()">Download</button>
+      <button
+        type="button"
+        class="ms-auto btn btn-primary"
+        (click)="downloadPdf()"
+      >
+        Download
+      </button>
     </div>
   </section>
 </main>
