@@ -19,12 +19,17 @@ export class AppComponent implements OnInit {
   @Input() get userData(): User {
     return this._userData;
   }
+
+  public stylePath: any = '../assets/scss/layout/print.css';
+  public fontURL: any =
+    'https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&display=swap';
+
   set userData(value: User) {
     this._userData = value;
-    if(this._userData.firstName && this._userData.lastName) {
-      this.userName = this._userData.firstName+" "+this._userData.lastName;
+    if (this._userData.firstName && this._userData.lastName) {
+      this.userName = this._userData.firstName + ' ' + this._userData.lastName;
     } else {
-      this.userName = "Your Name";
+      this.userName = 'Your Name';
     }
   }
 
@@ -41,7 +46,7 @@ export class AppComponent implements OnInit {
   constructor() {
     this.userData = {
       jobTitle: 'Job Title',
-      firstName: 'First Name',
+      firstName: 'first name',
       lastName: 'Last Name',
       emailAddress: 'abc@example.com',
       address: '123, Your street,',
@@ -72,8 +77,21 @@ export class AppComponent implements OnInit {
 
     const pagePdfWrapper = this.pdfWrapper.nativeElement;
     var html = htmlToPdfMake(pagePdfWrapper.innerHTML);
-    const documentDefinition = { content: html };
-    pdfMake.createPdf(documentDefinition).download();
+    const documentDefinition = {
+      content: [{ text: html, style: 'customStyle' }, {table}],
+      styles: {
+        customStyle: {
+          fontSize: 30,
+          bold: true,
+        }
+      },
+      footer: function(currentPage: any, pageCount: any) { return currentPage.toString() + ' of ' + pageCount; },
+    };
+    // const documentDefinition = {
+    //   header: 'Print Resume',
+    //   content: html,
+    // };
+    pdfMake.createPdf(documentDefinition).open();
   }
 
   ngOnInit(): void {}

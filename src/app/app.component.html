@@ -6,31 +6,16 @@
     ></app-header>
     <div class="p-4">
       <app-user (userData)="getUserData($event)"></app-user>
-      <app-home [msg]="userData.firstName"></app-home>
+      <p>{{userName | titlecase}}</p>
     </div>
   </section>
   <section class="g-col-6 border-start bg-light grid gap-0 overflow-hidden">
-    <!-- Table -->
-    <style>
-      @media print {
-        p {
-          font-size: 28px;
-        }
-      }
-      @page {
-        padding-top: 0.2em;
-        padding-bottom: 0.2em;
-        /* Letter */
-        size: us-letter;
-        margin: 1in;
-      }
-    </style>
     <table class="table g-col-12 bg-white m-4" #pdfWrapper aria-describedby="Resume Table">
       <tbody>
         <tr>
-          <td style="font-size: 28px; font-weight: 700">
-            {{ userName }}
-            <p class="fs-3 fw-semibold mb-0">{{ userName }}</p>
+          <td style="color: red;">
+            {{ userName | titlecase }}
+            <p class="fs-3 fw-semibold mb-0">{{ userName | titlecase }}</p>
             <p class="fs-5 text-muted mb-0">{{ userData.jobTitle }}</p>
           </td>
           <td>
