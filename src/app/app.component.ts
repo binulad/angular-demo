@@ -76,21 +76,32 @@ export class AppComponent implements OnInit {
     console.log('Download pdf');
 
     const pagePdfWrapper = this.pdfWrapper.nativeElement;
-    var html = htmlToPdfMake(pagePdfWrapper.innerHTML);
+    let html: any = htmlToPdfMake(pagePdfWrapper.innerHTML);
     const documentDefinition = {
-      content: [{ text: html, style: 'customStyle' }, {table}],
+      content: [
+        { text: html, style: 'customStyle' },
+        {
+          columns: [
+            [
+              {
+                text: `${this.userName}
+                ${this.userData.jobTitle}`,
+                style: 'userDetailsStyle'
+              }
+            ]
+          ]
+        }
+      ],
       styles: {
         customStyle: {
           fontSize: 30,
           bold: true,
-        }
+        },
+        userDetailsStyle: {
+          color: 'green',
+        },
       },
-      footer: function(currentPage: any, pageCount: any) { return currentPage.toString() + ' of ' + pageCount; },
     };
-    // const documentDefinition = {
-    //   header: 'Print Resume',
-    //   content: html,
-    // };
     pdfMake.createPdf(documentDefinition).open();
   }
 
