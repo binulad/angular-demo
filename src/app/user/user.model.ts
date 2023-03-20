@@ -6,8 +6,6 @@ export class User {
   public phoneNumber?: number;
   public address?: string;
   public pinCode?: number;
-  public state?: string;
-  public country?: string;
   constructor(
     jobTitle: string,
     firstName: string,
@@ -16,8 +14,6 @@ export class User {
     phoneNumber?: number,
     address?: string,
     pinCode?: number,
-    state?: string,
-    country?: string
   ) {
     this.jobTitle = jobTitle;
     this.firstName = firstName;
@@ -26,7 +22,5 @@ export class User {
     this.phoneNumber = phoneNumber;
     this.address = address;
     this.pinCode = pinCode;
-    this.state = state;
-    this.country = country;
   }
 }

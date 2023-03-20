@@ -33,8 +33,6 @@ export class UserDetailsComponent {
       phoneNumber: new FormControl(),
       address: new FormControl(),
       pinCode: new FormControl(),
-      state: new FormControl(),
-      country: new FormControl()
     });
   }
 

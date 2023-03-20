@@ -4,13 +4,15 @@ import { UserDetailsComponent } from './user-details/user-details.component';
 import { UserBioComponent } from './user-bio/user-bio.component';
 import { CoreModule } from '../core/core.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UserResumeComponent } from './user-resume/user-resume.component';
 
 
 
 @NgModule({
   declarations: [
     UserDetailsComponent,
-    UserBioComponent
+    UserBioComponent,
+    UserResumeComponent
   ],
   imports: [
     CommonModule,
@@ -18,6 +20,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule
   ],
-  exports: [UserDetailsComponent, UserBioComponent],
+  exports: [UserDetailsComponent, UserBioComponent, UserResumeComponent],
 })
 export class UserModule { }

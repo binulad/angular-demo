@@ -6,16 +6,6 @@
     ></app-header>
     <div class="p-4">
       <app-user (userData)="getUserData($event)"></app-user>
-      <p>{{userName | titlecase}}</p>
-    </div>
-    <div class="action-area p-4 border-top d-flex">
-      <button
-        type="button"
-        class="ms-auto btn btn-primary"
-        (click)="downloadPdf()"
-      >
-        Download
-      </button>
     </div>
   </section>
 </main>
