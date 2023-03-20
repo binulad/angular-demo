@@ -74,6 +74,7 @@
         class="form-control"
         placeholder="Enter the Address"
         formControlName="address"
+        (keyup)="onChangeInput()"
       ></textarea>
     </div>
     <!-- End: Address -->
@@ -88,6 +89,7 @@
         id="pinCode"
         formControlName="pinCode"
         placeholder="Enter Pin Code"
+        (keyup)="onChangeInput()"
       />
     </div>
     <!-- End: Pin code -->
@@ -102,6 +104,7 @@
         class="form-control"
         id="phoneNumber"
         placeholder="Enter Phone Number"
+        (keyup)="onChangeInput()"
       />
     </div>
     <!-- End: Phone Number -->

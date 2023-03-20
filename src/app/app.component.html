@@ -1,5 +1,5 @@
-<main class="grid gap-0 h-100">
-  <section class="g-col-6">
+<main class="grid gap-0 bg-light">
+  <section class="g-col-12 g-col-md-8 g-start-md-3 g-col-xl-6 g-start-xl-4 bg-white">
     <app-header
       [userName]="userName"
       [jobTitle]="userData.jobTitle"
@@ -8,29 +8,7 @@
       <app-user (userData)="getUserData($event)"></app-user>
       <p>{{userName | titlecase}}</p>
     </div>
-  </section>
-  <section class="g-col-6 border-start bg-light grid gap-0 overflow-hidden">
-    <table class="table g-col-12 bg-white m-4" #pdfWrapper aria-describedby="Resume Table">
-      <tbody>
-        <tr>
-          <td style="color: red;">
-            {{ userName | titlecase }}
-            <p class="fs-3 fw-semibold mb-0">{{ userName | titlecase }}</p>
-            <p class="fs-5 text-muted mb-0">{{ userData.jobTitle }}</p>
-          </td>
-          <td>
-            {{ userData.address }}<br />
-            {{ userData.pinCode }}
-            Your State, Your Country
-            <br /><br />
-            (123)-456-7890 info@example.com
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <!-- Table -->
-
-    <div class="action-area p-4 border-top d-flex g-col-12">
+    <div class="action-area p-4 border-top d-flex">
       <button
         type="button"
         class="ms-auto btn btn-primary"

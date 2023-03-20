@@ -6,7 +6,6 @@ declare var require: any;
 
 import * as pdfMake from 'pdfmake/build/pdfmake';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
-const htmlToPdfMake = require('html-to-pdfmake');
 (pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
@@ -14,15 +13,9 @@ const htmlToPdfMake = require('html-to-pdfmake');
   templateUrl: './app.component.html',
 })
 export class AppComponent implements OnInit {
-  @ViewChild('pdfWrapper') public pdfWrapper!: ElementRef;
-
   @Input() get userData(): User {
     return this._userData;
   }
-
-  public stylePath: any = '../assets/scss/layout/print.css';
-  public fontURL: any =
-    'https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&display=swap';
 
   set userData(value: User) {
     this._userData = value;
@@ -51,6 +44,7 @@ export class AppComponent implements OnInit {
       emailAddress: 'abc@example.com',
       address: '123, Your street,',
       pinCode: 123456,
+      phoneNumber: 4445556868,
     };
   }
 
@@ -73,36 +67,92 @@ export class AppComponent implements OnInit {
   }
 
   downloadPdf() {
-    console.log('Download pdf');
-
-    const pagePdfWrapper = this.pdfWrapper.nativeElement;
-    let html: any = htmlToPdfMake(pagePdfWrapper.innerHTML);
     const documentDefinition = {
       content: [
-        { text: html, style: 'customStyle' },
         {
-          columns: [
-            [
-              {
-                text: `${this.userName}
-                ${this.userData.jobTitle}`,
-                style: 'userDetailsStyle'
-              }
-            ]
-          ]
-        }
+          layout: 'lightHorizontalLines', // optional
+          table: {
+            headerRows: 1,
+            widths: [ '*' ],
+            body: [
+              [
+                // User Name
+                {
+                  text: [
+                    this.userName,
+                    {
+                      text: ` (${this.userData.jobTitle})`,
+                      style: { bold: false, color: '#5F6A6A', italics: true },
+                    },
+                  ],
+                  style: {
+                    fontSize: 18,
+                    bold: true,
+                    color: '#1B4F72'
+                  },
+                  margin: [0, 0, 0, 10],
+                },
+              ],
+              [
+                // User Details
+                {
+                  columns: [
+                    {
+                      width: '50%',
+                      text: [
+                        'Email: ',
+                        {
+                          text: `${this.userData.emailAddress}`,
+                          style: { bold: false },
+                        },
+                        '\nPhone No: ',
+                        {
+                          text: `${this.userData.phoneNumber}`,
+                          style: { bold: false },
+                        },
+                      ],
+                      style: { bold: true },
+                      margin: [0, 20]
+                    },
+                    {
+                      width: '50%',
+                      text: `${this.userData.address} - ${this.userData.pinCode}
+                    ${this.userData.state}, ${this.userData.country}`,
+                      margin: [0, 20],
+                    },
+                  ],
+                  columnGap: 10,
+                },
+              ],
+              [
+                // User Short Bio
+                {margin: [0, 20]}
+              ],
+            ],
+          },
+        },
       ],
       styles: {
-        customStyle: {
-          fontSize: 30,
-          bold: true,
-        },
-        userDetailsStyle: {
-          color: 'green',
+        dividerStyle: {
+          background: '#dddddd',
         },
       },
+      defaultStyle: {
+        font: 'Nunito',
+        color: '#666666',
+      },
     };
-    pdfMake.createPdf(documentDefinition).open();
+    pdfMake
+      .createPdf(documentDefinition, undefined, {
+        Nunito: {
+          normal: 'http://localhost:4200/assets/fonts/Nunito-Regular.ttf',
+          bold: 'http://localhost:4200/assets/fonts/Nunito-Bold.ttf',
+          italics: 'http://localhost:4200/assets/fonts/Nunito-Italic.ttf',
+          bolditalics:
+            'http://localhost:4200/assets/fonts/Nunito-BoldItalic.ttf',
+        },
+      })
+      .open();
   }
 
   ngOnInit(): void {}
