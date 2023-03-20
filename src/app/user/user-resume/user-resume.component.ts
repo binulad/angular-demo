@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 
 import * as pdfMake from 'pdfmake/build/pdfmake';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+import { User } from '../user.model';
 (pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
@@ -10,7 +11,27 @@ import * as pdfFonts from 'pdfmake/build/vfs_fonts';
   styleUrls: ['./user-resume.component.scss']
 })
 export class UserResumeComponent {
-  @Input() userData: any = {};
+  @Input() get userData(): User {
+    return this._userDetails;
+  }
+
+  set userData(value: User) {
+    this._userDetails = value;
+
+    if (this._userDetails.firstName && this._userDetails.lastName) {
+      this.userName = this._userDetails.firstName + ' ' + this._userDetails.lastName;
+    } else {
+      this.userName = '-';
+    }
+
+    this.jobTitle = this._userDetails.jobTitle;
+    this.email = this._userDetails.emailAddress;
+  }
+
+  public _userDetails!: User;
+  public userName!: string;
+  public jobTitle!: string;
+  public email!: string;
 
   constructor() {}
 
@@ -27,9 +48,9 @@ export class UserResumeComponent {
                 // User Name
                 {
                   text: [
-                    this.userData.firstName + ' ' + this.userData.lastName,
+                    this.userName,
                     {
-                      text: ` (${this.userData.jobTitle})`,
+                      text: ` (${this.jobTitle})`,
                       style: { bold: false, color: '#5F6A6A', italics: true },
                     },
                   ],
@@ -50,7 +71,7 @@ export class UserResumeComponent {
                       text: [
                         'Email: ',
                         {
-                          text: `${this.userData.emailAddress}`,
+                          text: `${this.email}`,
                           style: { bold: false },
                         },
                         '\nPhone No: ',

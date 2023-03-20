@@ -3,7 +3,7 @@ export class User {
   public firstName: string;
   public lastName: string;
   public emailAddress: string;
-  public phoneNumber?: number;
+  public phoneNumber?: number | null;
   public address?: string;
   public pinCode?: number;
   constructor(
@@ -11,7 +11,7 @@ export class User {
     firstName: string,
     lastName: string,
     emailAddress: string,
-    phoneNumber?: number,
+    phoneNumber?: number | null,
     address?: string,
     pinCode?: number,
   ) {
