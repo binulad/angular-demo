@@ -6,14 +6,13 @@
     <select
       id="jobTitle"
       name="jobTitle"
-      (change)="onChangeJobTitle(userDetailsForm.value.jobTitle)"
       formControlName="jobTitle"
       class="form-select"
     >
       <option selected>Select Job Title</option>
-      <option *ngFor="let item of jobTitleList" [value]="item.id">
-        {{ item.name }}
-      </option>
+      <!-- <option *ngFor="let (value, key) of jobTitleList" [value]="item.key">
+        {{ item.value }}
+      </option> -->
     </select>
   </div>
   <!-- End: Job Title -->
@@ -25,7 +24,6 @@
       type="text"
       name="firstName"
       formControlName="firstName"
-      (keyup)="onChangeInput()"
       class="form-control"
       id="firstName"
       placeholder="Enter First Name"
@@ -40,7 +38,6 @@
       type="text"
       name="lastName"
       formControlName="lastName"
-      (keyup)="onChangeInput()"
       class="form-control"
       id="lastName"
       placeholder="Enter Last Name"
@@ -55,7 +52,6 @@
       type="email"
       name="emailAddress"
       formControlName="emailAddress"
-      (keyup)="onChangeInput()"
       class="form-control"
       id="emailAddress"
       placeholder="Enter Email Address"
@@ -74,7 +70,6 @@
         class="form-control"
         placeholder="Enter the Address"
         formControlName="address"
-        (keyup)="onChangeInput()"
       ></textarea>
     </div>
     <!-- End: Address -->
@@ -89,7 +84,6 @@
         id="pinCode"
         formControlName="pinCode"
         placeholder="Enter Pin Code"
-        (keyup)="onChangeInput()"
       />
     </div>
     <!-- End: Pin code -->
@@ -104,7 +98,6 @@
         class="form-control"
         id="phoneNumber"
         placeholder="Enter Phone Number"
-        (keyup)="onChangeInput()"
       />
     </div>
     <!-- End: Phone Number -->

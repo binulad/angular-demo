@@ -1,10 +1,19 @@
 <!-- User Details -->
 <section>
   <app-section-header [sectionTitle]="sectionTitle" [isShowLanguage]="true"></app-section-header>
-  <app-user-details (userData)="getUserData($event)"></app-user-details>
 </section>
 <!-- End: User Details -->
-<app-user-bio></app-user-bio>
-
+<ng-container [formGroup]="formData">
+  <app-user-details formGroupName="userDetails"></app-user-details>
+  <app-user-bio formGroupName="userBio"></app-user-bio>
+</ng-container>
 <!-- Download Resume -->
-<app-user-resume [userData]="userDetails"></app-user-resume>
+<div class="action-area pt-4 border-top d-flex">
+  <button
+    type="button"
+    class="ms-auto btn btn-primary"
+    (click)="downloadPdf()"
+    >
+    Download
+  </button>
+</div>
