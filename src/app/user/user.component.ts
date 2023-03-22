@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 import * as pdfMake from 'pdfmake/build/pdfmake';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+import { Constant } from './constant/user-data';
 (pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
@@ -16,6 +17,7 @@ export class UserComponent implements OnInit {
   public formData!: FormGroup;
   public getUserDetails!: any;
   public getUserBio!: any;
+  public jobTitle!: any;
 
   constructor(private fb: FormBuilder) {}
 
@@ -31,7 +33,7 @@ export class UserComponent implements OnInit {
         phoneNumber: null,
       }),
       userBio: this.fb.group({
-        firstName: null,
+        userDesc: null,
       }),
     });
   }
@@ -48,31 +50,21 @@ export class UserComponent implements OnInit {
       userName = '-';
     }
 
+    const jobTitleList = Constant.JOB_TITLES;
+    const getJobTitle = jobTitleList.find(element => element.id == this.getUserDetails.jobTitle);
+    this.jobTitle = getJobTitle?.name;
+    
     const documentDefinition = {
       content: [
         {
-          layout: 'lightHorizontalLines', // optional
+          // layout: 'lightHorizontalLines', // optional
+          layout: 'noBorders', // optional
           table: {
             headerRows: 1,
             widths: ['*'],
             body: [
               [
-                // User Name
-                {
-                  text: [
-                    userName,
-                    {
-                      text: ` (${this.getUserDetails.jobTitle})`,
-                      style: { bold: false, color: '#5F6A6A', italics: true },
-                    },
-                  ],
-                  style: {
-                    fontSize: 18,
-                    bold: true,
-                    color: '#1B4F72',
-                  },
-                  margin: [0, 0, 0, 10],
-                },
+                this.getUserName(userName)
               ],
               [
                 // User Details
@@ -93,7 +85,7 @@ export class UserComponent implements OnInit {
                         },
                       ],
                       style: { bold: true },
-                      margin: [0, 20],
+                      margin: [0, 10],
                     },
                     {
                       width: '50%',
@@ -105,7 +97,45 @@ export class UserComponent implements OnInit {
                         },
                       ],
                       style: { bold: true },
-                      margin: [0, 20],
+                      margin: [0, 10],
+                    },
+                  ],
+                  columnGap: 10,
+                },
+              ],
+              this.getUserBioData(this.getUserBio),
+              [
+                // User Details
+                {
+                  columns: [
+                    {
+                      width: '50%',
+                      text: [
+                        'Email: ',
+                        {
+                          text: `${this.getUserDetails.emailAddress}`,
+                          style: { bold: false },
+                        },
+                        '\nPhone No: ',
+                        {
+                          text: `${this.getUserDetails.phoneNumber}`,
+                          style: { bold: false },
+                        },
+                      ],
+                      style: { bold: true },
+                      margin: [0, 10],
+                    },
+                    {
+                      width: '50%',
+                      text: [
+                        'Address: ',
+                        {
+                          text: `${this.getUserDetails.address} - ${this.getUserDetails.pinCode}`,
+                          style: { bold: false },
+                        },
+                      ],
+                      style: { bold: true },
+                      margin: [0, 10],
                     },
                   ],
                   columnGap: 10,
@@ -113,6 +143,18 @@ export class UserComponent implements OnInit {
               ],
             ],
           },
+          // layout: {
+          //   hLineWidth: function (i: any, node: any) {
+          //     debugger
+          //     if (i === 0 || i === node.table.body.length) {
+          //       return 0;
+          //     } 
+          //     return (i === 1) ? 2 : 1;
+          //   },
+          //   vLineWidth: function (i: any, node: any) {
+          //     return 0;
+          //   },
+          // }
         },
       ],
       styles: {
@@ -136,5 +178,44 @@ export class UserComponent implements OnInit {
         },
       })
       .open();
+  }
+
+  getUserName(userName: string) {
+    return {
+      text: [
+        userName,
+        {
+          text: ` (${this.jobTitle})`,
+          style: { bold: false, color: '#5F6A6A', italics: true },
+        },
+      ],
+      style: {
+        fontSize: 18,
+        bold: true,
+        color: '#1B4F72',
+      },
+      margin: [0, 0, 0, 10],
+    }
+  }
+
+  getUserBioData(data: any) {
+    if(data.userDesc) {
+      return [{
+        text: [
+          {
+            text: 'Short Bio: ',
+            style: { bold: true, fontSize: 14, color: '#333333' },
+            border: [true, true, true, true],
+            borderColor: ['red']
+          },
+          {
+            text: `\n${data.userDesc}`
+          },
+        ],
+        margin: [0, 10],
+      }]
+    } else {
+      return [{text: '', border: [false, false, false, false]}];
+    }
   }
 }

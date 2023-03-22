@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormGroupDirective } from '@angular/forms';
-import { jobTitleObj } from '../user.model';
+import { Constant } from '../constant/user-data';
 
 @Component({
   selector: 'app-user-details',
@@ -12,18 +12,7 @@ export class UserDetailsComponent implements OnInit {
   @Input() userDetailsForm!: FormGroup;
 
   public editAdditionalInfo: boolean = false;
-
-  // jobTitleList = [
-  //   {
-  //     id: 1,
-  //     name: 'Service Designer',
-  //   },
-  //   {
-  //     id: 2,
-  //     name: 'UI Designer',
-  //   },
-  // ];
-  public jobTitleList = {...jobTitleObj};
+  public jobTitleList = Constant.JOB_TITLES;
 
   constructor(private rootFormGroup: FormGroupDirective) {
   }
@@ -31,7 +20,7 @@ export class UserDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.userDetailsForm = this.rootFormGroup.control.get(this.formGroupName) as FormGroup;
 
-    console.log("jobTitleList", this.jobTitleList);
+    // console.log("jobTitleList", this.jobTitleList);
     
   }
 

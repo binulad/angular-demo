@@ -7,7 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class SectionHeaderComponent implements OnInit {
   @Input() sectionTitle: string = "Section Title";
-  @Input() isShowLanguage: boolean = false;
+  @Input() shortDesc!: string;
 
   ngOnInit(): void {}
 }

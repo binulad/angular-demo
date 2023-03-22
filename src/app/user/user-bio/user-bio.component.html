@@ -1,12 +1,11 @@
-
+<app-section-header [sectionTitle]="'Short Bio'" [shortDesc]="headerShortDesc"></app-section-header>
 <form [formGroup]="formDetails">
-  <label for="firstName" class="form-label">First Name</label>
-  <input
-    type="text"
-    name="firstName"
-    [formControlName]="'firstName'"
+  <textarea
+    name="userDesc"
     class="form-control"
-    id="firstName"
-    placeholder="Enter First Name"
-  />
+    id="userDesc"
+    formControlName="userDesc"
+    placeholder="Short description about your self"
+    rows="4"
+  ></textarea>
 </form>

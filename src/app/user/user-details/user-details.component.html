@@ -1,5 +1,5 @@
 <!-- User Details Form -->
-<form [formGroup]="userDetailsForm" class="grid g-3 my-3">
+<form [formGroup]="userDetailsForm" class="grid g-3 mb-3">
   <!-- Job Title -->
   <div class="g-col-12">
     <label for="jobTitle" class="form-label">Job Title</label>
@@ -10,9 +10,9 @@
       class="form-select"
     >
       <option selected>Select Job Title</option>
-      <!-- <option *ngFor="let (value, key) of jobTitleList" [value]="item.key">
-        {{ item.value }}
-      </option> -->
+      <option *ngFor="let item of jobTitleList" [value]="item.id">
+        {{ item.name }}
+      </option>
     </select>
   </div>
   <!-- End: Job Title -->
