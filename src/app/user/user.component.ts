@@ -58,7 +58,9 @@ export class UserComponent implements OnInit {
       content: [
         {
           // layout: 'lightHorizontalLines', // optional
-          layout: 'noBorders', // optional
+          layout: {
+            defaultBorder: false,
+          }, // optional
           table: {
             headerRows: 1,
             widths: ['*'],
@@ -104,57 +106,8 @@ export class UserComponent implements OnInit {
                 },
               ],
               this.getUserBioData(this.getUserBio),
-              [
-                // User Details
-                {
-                  columns: [
-                    {
-                      width: '50%',
-                      text: [
-                        'Email: ',
-                        {
-                          text: `${this.getUserDetails.emailAddress}`,
-                          style: { bold: false },
-                        },
-                        '\nPhone No: ',
-                        {
-                          text: `${this.getUserDetails.phoneNumber}`,
-                          style: { bold: false },
-                        },
-                      ],
-                      style: { bold: true },
-                      margin: [0, 10],
-                    },
-                    {
-                      width: '50%',
-                      text: [
-                        'Address: ',
-                        {
-                          text: `${this.getUserDetails.address} - ${this.getUserDetails.pinCode}`,
-                          style: { bold: false },
-                        },
-                      ],
-                      style: { bold: true },
-                      margin: [0, 10],
-                    },
-                  ],
-                  columnGap: 10,
-                },
-              ],
             ],
           },
-          // layout: {
-          //   hLineWidth: function (i: any, node: any) {
-          //     debugger
-          //     if (i === 0 || i === node.table.body.length) {
-          //       return 0;
-          //     } 
-          //     return (i === 1) ? 2 : 1;
-          //   },
-          //   vLineWidth: function (i: any, node: any) {
-          //     return 0;
-          //   },
-          // }
         },
       ],
       styles: {
@@ -194,28 +147,30 @@ export class UserComponent implements OnInit {
         bold: true,
         color: '#1B4F72',
       },
+      border: [false, false, false, true],
+      borderColor: ['','','','#333333'],
       margin: [0, 0, 0, 10],
     }
   }
 
   getUserBioData(data: any) {
-    if(data.userDesc) {
+    if(data.userDesc == null || data.userDesc == "") {
+      return [{text: '', border: [false, false, false, false]}];
+    } else {
       return [{
         text: [
           {
-            text: 'Short Bio: ',
+            text: 'Short Bio: \n',
             style: { bold: true, fontSize: 14, color: '#333333' },
-            border: [true, true, true, true],
-            borderColor: ['red']
           },
           {
-            text: `\n${data.userDesc}`
+            text: `${data.userDesc}`
           },
         ],
+        border: [false, true, false, false],
+        borderColor: ['','#dddddd','',''],
         margin: [0, 10],
       }]
-    } else {
-      return [{text: '', border: [false, false, false, false]}];
     }
   }
 }
