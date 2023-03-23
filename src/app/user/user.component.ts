@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 import * as pdfMake from 'pdfmake/build/pdfmake';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
@@ -24,28 +24,31 @@ export class UserComponent implements OnInit {
   ngOnInit(): void {
     this.formData = this.fb.group({
       userDetails: this.fb.group({
-        jobTitle: null,
-        firstName: null,
-        lastName: null,
-        emailAddress: null,
-        address: null,
-        pinCode: null,
-        phoneNumber: null,
+        jobTitle: [null, Validators.required],
+        firstName: [null, Validators.required],
+        lastName: [null, Validators.required],
+        emailAddress: [null, Validators.required],
+        address: [null, Validators.required],
+        pinCode: [null, Validators.required],
+        phoneNumber: [null, Validators.required],
       }),
       userBio: this.fb.group({
-        userDesc: null,
+        userDesc: [null, Validators.required],
       }),
       userExperiences: this.fb.group({
         experiences: this.fb.array([
           this.fb.group({
-            jobTitle: null,
-            company: null,
-            location: null,
-            jobDesc: null,
+            jobTitle: [null, Validators.required],
+            company: [null, Validators.required],
+            location: [null, Validators.required],
+            jobDesc: [null, Validators.required],
           }),
         ]),
       }),
     });
+  }
+  showFromData() {
+    console.log(this.formData);
   }
 
   downloadPdf() {
