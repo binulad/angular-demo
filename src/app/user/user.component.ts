@@ -35,9 +35,19 @@ export class UserComponent implements OnInit {
       userBio: this.fb.group({
         userDesc: null,
       }),
+      userExperiences: this.fb.group({
+        experiences: this.fb.array([
+          this.fb.group({
+            jobTitle: null,
+            company: null,
+            location: null,
+            jobDesc: null,
+          }),
+        ]),
+      }),
     });
   }
-  
+
   downloadPdf() {
     this.getUserDetails = this.formData.value.userDetails;
     this.getUserBio = this.formData.value.userBio;
@@ -51,9 +61,11 @@ export class UserComponent implements OnInit {
     }
 
     const jobTitleList = Constant.JOB_TITLES;
-    const getJobTitle = jobTitleList.find(element => element.id == this.getUserDetails.jobTitle);
+    const getJobTitle = jobTitleList.find(
+      (element) => element.id == this.getUserDetails.jobTitle
+    );
     this.jobTitle = getJobTitle?.name;
-    
+
     const documentDefinition = {
       content: [
         {
@@ -65,47 +77,10 @@ export class UserComponent implements OnInit {
             headerRows: 1,
             widths: ['*'],
             body: [
-              [
-                this.getUserName(userName)
-              ],
-              [
-                // User Details
-                {
-                  columns: [
-                    {
-                      width: '50%',
-                      text: [
-                        'Email: ',
-                        {
-                          text: `${this.getUserDetails.emailAddress}`,
-                          style: { bold: false },
-                        },
-                        '\nPhone No: ',
-                        {
-                          text: `${this.getUserDetails.phoneNumber}`,
-                          style: { bold: false },
-                        },
-                      ],
-                      style: { bold: true },
-                      margin: [0, 10],
-                    },
-                    {
-                      width: '50%',
-                      text: [
-                        'Address: ',
-                        {
-                          text: `${this.getUserDetails.address} - ${this.getUserDetails.pinCode}`,
-                          style: { bold: false },
-                        },
-                      ],
-                      style: { bold: true },
-                      margin: [0, 10],
-                    },
-                  ],
-                  columnGap: 10,
-                },
-              ],
+              this.getUserName(userName),
+              this.getUserDetail(this.getUserDetails),
               this.getUserBioData(this.getUserBio),
+              this.getUserExperience(this.formData.value.userExperiences),
             ],
           },
         },
@@ -133,44 +108,135 @@ export class UserComponent implements OnInit {
       .open();
   }
 
+  // This method is called Print the User Name in the Resume
   getUserName(userName: string) {
-    return {
-      text: [
-        userName,
-        {
-          text: ` (${this.jobTitle})`,
-          style: { bold: false, color: '#5F6A6A', italics: true },
+    return [
+      {
+        text: [
+          userName,
+          {
+            text: ` (${this.jobTitle})`,
+            style: { bold: false, color: '#5F6A6A', italics: true },
+          },
+        ],
+        style: {
+          fontSize: 18,
+          bold: true,
+          color: '#1B4F72',
         },
-      ],
-      style: {
-        fontSize: 18,
-        bold: true,
-        color: '#1B4F72',
+        border: [false, false, false, true],
+        borderColor: ['', '', '', '#333333'],
+        margin: [0, 0, 0, 10],
       },
-      border: [false, false, false, true],
-      borderColor: ['','','','#333333'],
-      margin: [0, 0, 0, 10],
+    ];
+  }
+
+  // This method is called to print the User Details in resume
+  getUserDetail(userData: any) {
+    return [
+      // User Details
+      {
+        columns: [
+          {
+            width: '50%',
+            text: [
+              'Email: ',
+              {
+                text: `${userData.emailAddress}`,
+                style: { bold: false },
+              },
+              '\nPhone No: ',
+              {
+                text: `${userData.phoneNumber}`,
+                style: { bold: false },
+              },
+            ],
+            style: { bold: true },
+            margin: [0, 10],
+          },
+          {
+            width: '50%',
+            text: [
+              'Address: ',
+              {
+                text: `${userData.address} - ${userData.pinCode}`,
+                style: { bold: false },
+              },
+            ],
+            style: { bold: true },
+            margin: [0, 10],
+          },
+        ],
+        columnGap: 10,
+      },
+    ];
+  }
+
+  // This method is called to print the User Short Bio in resume
+  getUserBioData(data: any) {
+    // Trim the Short Bio
+    const userDesc = data.userDesc ? data.userDesc.trim() : null;
+    if (userDesc == null || userDesc == '') {
+      return [{ text: '', border: [false, false, false, false] }];
+    } else {
+      return [
+        {
+          text: [
+            {
+              text: 'Short Bio: \n',
+              style: { bold: true, fontSize: 14, color: '#333333' },
+            },
+            {
+              text: `\n${userDesc}`,
+            },
+          ],
+          border: [false, true, false, false],
+          borderColor: ['', '#dddddd', '', ''],
+          margin: [0, 10],
+        },
+      ];
     }
   }
 
-  getUserBioData(data: any) {
-    if(data.userDesc == null || data.userDesc == "") {
-      return [{text: '', border: [false, false, false, false]}];
+  // This method is called to print the User Experience in resume
+  getUserExperience(data: any) {
+    const userExpArr = data.experiences;
+    if (userExpArr.length) {
+      return [
+        {
+          text: this.getUserExpData(userExpArr),
+          border: [false, true, false, false],
+          borderColor: ['', '#dddddd', '', ''],
+          margin: [0, 10],
+        },
+      ];
     } else {
-      return [{
-        text: [
-          {
-            text: 'Short Bio: \n',
-            style: { bold: true, fontSize: 14, color: '#333333' },
-          },
-          {
-            text: `${data.userDesc}`
-          },
-        ],
-        border: [false, true, false, false],
-        borderColor: ['','#dddddd','',''],
-        margin: [0, 10],
-      }]
+      return [{ text: '', border: [false, false, false, false] }];
     }
+  }
+  // This method is called to print the User Experience in resume
+  getUserExpData(expArr: any) {
+    let text: any = [
+      {
+        text: 'User Experience: \n',
+        style: { bold: true, fontSize: 14, color: '#333333' },
+      },
+    ];
+    expArr.forEach((element: any) => {
+      text.push({
+        text: `\n${element.company}`,
+        style: { bold: true, color: '#333333' },
+      }, {
+        text: ` - ${element.jobTitle}\n`,
+        style: { bold: true },
+      }, {
+        text: `${element.location}\n`,
+        style: { italics: true },
+      }, {
+        text: `${element.jobDesc}\n`,
+      }
+      );
+    });
+    return text;
   }
 }

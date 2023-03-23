@@ -4,6 +4,7 @@ import { UserDetailsComponent } from './user-details/user-details.component';
 import { UserBioComponent } from './user-bio/user-bio.component';
 import { CoreModule } from '../core/core.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UserExperienceComponent } from './user-experience/user-experience.component';
 
 
 
@@ -11,6 +12,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   declarations: [
     UserDetailsComponent,
     UserBioComponent,
+    UserExperienceComponent,
   ],
   imports: [
     CommonModule,
@@ -18,6 +20,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule
   ],
-  exports: [UserDetailsComponent, UserBioComponent],
+  exports: [UserDetailsComponent, UserBioComponent, UserExperienceComponent],
 })
 export class UserModule { }

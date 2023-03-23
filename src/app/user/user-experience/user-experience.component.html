@@ -1,0 +1,110 @@
+<app-section-header
+  [sectionTitle]="sectionTitle"
+  [shortDesc]="headerShortDesc"
+></app-section-header>
+<!-- User Experience Form -->
+<form [formGroup]="formDetails">
+  <div class="accordion accordion-flush" formArrayName="experiences">
+    <div
+      class="accordion-item"
+      *ngFor="let element of experiences.controls; let i = index"
+    >
+      <h2 class="accordion-header">
+        <button
+          class="accordion-button"
+          [class.collapsed]="isAccordionCollapse"
+          type="button"
+          (click)="onClickAccordion()"
+        >
+          <span class="fw-bold">{{
+            formDetails.value.experiences[i].jobTitle
+              ? formDetails.value.experiences[i].jobTitle
+              : "Untitled"
+          }}</span>
+        </button>
+      </h2>
+      <div
+        class="accordion-collapse"
+        [class.collapse]="isAccordionCollapse"
+        [formGroupName]="i"
+      >
+        <div class="accordion-body grid g-3">
+          <!-- Job Title -->
+          <div class="g-col-6">
+            <label for="jobTitle" class="form-label">Job Title</label>
+            <input
+              type="text"
+              name="jobTitle"
+              formControlName="jobTitle"
+              class="form-control"
+              id="jobTitle"
+              placeholder="Enter Job Title"
+            />
+          </div>
+          <!-- End: Job Title -->
+
+          <!-- Company -->
+          <div class="g-col-6">
+            <label for="company" class="form-label">Company</label>
+            <input
+              type="text"
+              name="company"
+              formControlName="company"
+              class="form-control"
+              id="company"
+              placeholder="Enter Company Name"
+            />
+          </div>
+          <!-- End: Company -->
+
+          <!-- Location -->
+          <div class="g-col-12">
+            <label for="location" class="form-label">Location</label>
+            <input
+              type="text"
+              name="location"
+              formControlName="location"
+              class="form-control"
+              id="location"
+              placeholder="Enter Location"
+            />
+          </div>
+          <!-- End: Location -->
+
+          <!-- Job Description -->
+          <div class="g-col-12">
+            <label for="jobDesc" class="form-label">Job Description</label>
+            <textarea
+              name="jobDesc"
+              class="form-control"
+              id="jobDesc"
+              formControlName="jobDesc"
+              placeholder="Write your professional overview here"
+              rows="4"
+            ></textarea>
+          </div>
+          <!-- End: Job Description -->
+
+          <!-- Remove -->
+          <div class="g-col-12 d-flex justify-content-end" *ngIf="i > 0">
+            <button
+              type="button"
+              class="btn btn-sm btn-danger"
+              (click)="removeExperience(i)"
+            >
+              Remove
+            </button>
+          </div>
+          <!-- End: Remove -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Add Experience Action -->
+  <button type="button" class="btn btn-link d-flex" (click)="addExperience()">
+    <span class="bi bi-plus-circle fs-5 me-2"></span>
+    Add Experience
+  </button>
+  <!-- End: Add Experience Action -->
+</form>
+<!-- End: User Experience Form -->
