@@ -7,14 +7,13 @@
   <div class="accordion accordion-flush" formArrayName="experiences">
     <div
       class="accordion-item"
-      *ngFor="let element of experiences.controls; let i = index"
+      *ngFor="let element of experiences.controls; let i = index; first as isFirst"
     >
       <h2 class="accordion-header">
         <button
           class="accordion-button"
-          [class.collapsed.toggle]="activeIndex == i"
           type="button"
-          (click)="onClickAccordion(i)"
+          (click)="onClickAccordion($event, i)"
         >
           <span class="fw-bold">{{
             formDetails.value.experiences[i].jobTitle
@@ -25,7 +24,6 @@
       </h2>
       <div
         class="accordion-collapse"
-        [class.collapse.toggle]="isAccordionCollapse && activeIndex == i"
         [formGroupName]="i"
       >
         <div class="accordion-body grid g-3">
@@ -86,7 +84,7 @@
           <!-- End: Job Description -->
 
           <!-- Remove -->
-          <div class="g-col-12 d-flex justify-content-end" *ngIf="i > 0">
+          <div class="g-col-12 d-flex justify-content-end" *ngIf="!isFirst">
             <button
               type="button"
               class="btn btn-sm btn-danger"

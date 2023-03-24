@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -8,5 +8,13 @@ export class AppComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
+
+  getFirstName(value: any) {
+    console.log("Full Name", value);
+  }
+  getLastName(value: any) {
+    console.log("Full Name", value);
+  }
 }

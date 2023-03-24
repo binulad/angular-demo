@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import {
   FormArray,
   FormBuilder,
@@ -13,7 +13,7 @@ import { Constant } from '../constant/user-data';
   templateUrl: './user-experience.component.html',
   styleUrls: ['./user-experience.component.scss'],
 })
-export class UserExperienceComponent {
+export class UserExperienceComponent implements OnInit {
   @Input() formGroupName!: string;
   @Input() formDetails!: FormGroup;
 
@@ -37,9 +37,10 @@ export class UserExperienceComponent {
     ) as FormGroup;
   }
 
-  onClickAccordion(index: number) {
+  onClickAccordion(event: any, index: number) {
+    event.target.classList.toggle('collapsed');
+    event.target.parentNode.nextElementSibling.classList.toggle('collapse');
     this.activeIndex = index;
-    this.isAccordionCollapse = !this.isAccordionCollapse;
   }
 
   newExperience(): FormGroup {
