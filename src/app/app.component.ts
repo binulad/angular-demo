@@ -5,22 +5,15 @@ import { Component, Input, OnInit } from '@angular/core';
   templateUrl: './app.component.html',
 })
 export class AppComponent implements OnInit {
-
-  private firstName!: string;
-  private lastName!: string;
-
-   
+  public userName!: string;  
 
   constructor() {}
 
   ngOnInit(): void {
   }
   
-  getFirstName(value: any) {
-    this.firstName = value;
-  }
-  getLastName(value: any) {
-    this.lastName = value;
+  getUserName(name: string) {
+    this.userName = name;
   }
 
 }

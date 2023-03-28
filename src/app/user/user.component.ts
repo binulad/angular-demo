@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import * as pdfMake from 'pdfmake/build/pdfmake';
@@ -12,23 +12,16 @@ import { Constant } from './constant/user-data';
   styleUrls: ['./user.component.scss'],
 })
 export class UserComponent implements OnInit {
+  @Output() userName: EventEmitter<string> = new EventEmitter();
+
   sectionTitle: string = 'Your Details';
 
-  public _formData!: FormGroup;
+  public formData!: FormGroup;
   public getUserDetails!: any;
   public getUserBio!: any;
   public jobTitle!: any;
   public userFullName!: string;
 
-
-  public get formData(): FormGroup {
-    return this._formData;
-  }
-
-  set formData(formObj) {
-    debugger
-    this._formData = formObj;
-  }
 
   constructor(private fb: FormBuilder) {
     console.log("Constructor call");
@@ -61,20 +54,13 @@ export class UserComponent implements OnInit {
   ngOnInit(): void {}
 
   getUserFullName(name: string) {
-    console.log("User Name::", name);
+    this.userFullName = name;
+    this.userName.emit(name);
   }
 
   downloadPdf() {
     this.getUserDetails = this.formData.value.userDetails;
     this.getUserBio = this.formData.value.userBio;
-
-    let userName = '';
-    if (this.getUserDetails.firstName && this.getUserDetails.lastName) {
-      userName =
-        this.getUserDetails.firstName + ' ' + this.getUserDetails.lastName;
-    } else {
-      userName = '-';
-    }
 
     const jobTitleList = Constant.JOB_TITLES;
     const getJobTitle = jobTitleList.find(
@@ -93,7 +79,7 @@ export class UserComponent implements OnInit {
             headerRows: 1,
             widths: ['*'],
             body: [
-              this.getUserName(userName),
+              this.getUserName(this.userFullName),
               this.getUserDetail(this.getUserDetails),
               this.getUserBioData(this.getUserBio),
               this.getUserExperience(this.formData.value.userExperiences),

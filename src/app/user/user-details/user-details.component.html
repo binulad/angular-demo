@@ -27,7 +27,7 @@
       class="form-control"
       id="firstName"
       placeholder="Enter First Name"
-      (ngModelChange)="onChange($event)"
+      (blur)="onChange($event, 'firstName')"
     />
   </div>
   <!-- End: First Name -->
@@ -42,6 +42,7 @@
       class="form-control"
       id="lastName"
       placeholder="Enter Last Name"
+      (blur)="onChange($event, 'lastName')"
     />
   </div>
   <!-- End: Last Name -->

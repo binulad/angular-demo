@@ -15,6 +15,8 @@ export class UserDetailsComponent implements OnInit {
 
   private _userDetailsForm!: any;
   public fullName!: any;
+  public firstName!: string;
+  public lastName!: string;
 
   public editAdditionalInfo: boolean = false;
   public jobTitleList = Constant.JOB_TITLES;
@@ -45,7 +47,16 @@ export class UserDetailsComponent implements OnInit {
     this.editAdditionalInfo = !this.editAdditionalInfo;
   }
 
-  onChange(updatedValue: string) {
-    console.log("updatedValue", updatedValue);
+  onChange(event: any, inputName: string) {
+    if(inputName == 'firstName') {
+      this.firstName = event.target.value;
+    } else if(inputName == 'lastName') {
+      this.lastName = event.target.value;
+    }
+
+    if(this.firstName && this.lastName) {
+      this.fullName = `${this.firstName} ${this.lastName}`
+      this.userFullName.emit(this.fullName);
+    }
   }
 }

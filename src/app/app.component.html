@@ -1,9 +1,9 @@
 <main class="grid gap-0 bg-light">
   <section class="g-col-12 g-col-md-8 g-start-md-3 g-col-xl-6 g-start-xl-4 bg-white">
-    <app-header
+    <app-header [userName]="userName"
     ></app-header>
     <div class="p-4">
-      <app-user></app-user>
+      <app-user (userName)="getUserName($event)"></app-user>
     </div>
   </section>
 </main>

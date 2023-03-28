@@ -4,8 +4,7 @@
 </section>
 <!-- End: User Details -->
 <ng-container [formGroup]="formData">
-  <app-user-details formGroupName="userDetails"></app-user-details>
-  {{formData.value | json}}
+  <app-user-details formGroupName="userDetails" (userFullName)="getUserFullName($event)"></app-user-details>
   <hr class="my-5"/>
   <app-user-bio formGroupName="userBio"></app-user-bio>
   <hr class="my-5"/>
