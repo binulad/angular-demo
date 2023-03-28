@@ -5,11 +5,13 @@
 <!-- End: User Details -->
 <ng-container [formGroup]="formData">
   <app-user-details formGroupName="userDetails"></app-user-details>
+  {{formData.value | json}}
   <hr class="my-5"/>
   <app-user-bio formGroupName="userBio"></app-user-bio>
   <hr class="my-5"/>
   <app-user-experience formGroupName="userExperiences"></app-user-experience>
 </ng-container>
+
 <!-- Download Resume -->
 <div class="action-area pt-4 border-top d-flex">
   <button

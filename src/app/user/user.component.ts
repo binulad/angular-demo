@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import * as pdfMake from 'pdfmake/build/pdfmake';
@@ -12,22 +12,26 @@ import { Constant } from './constant/user-data';
   styleUrls: ['./user.component.scss'],
 })
 export class UserComponent implements OnInit {
-  @Output() firstName: EventEmitter<string> = new EventEmitter();
-  @Output() lastName: EventEmitter<string> = new EventEmitter();
-
   sectionTitle: string = 'Your Details';
 
-  public formData!: FormGroup;
+  public _formData!: FormGroup;
   public getUserDetails!: any;
   public getUserBio!: any;
   public jobTitle!: any;
   public userFullName!: string;
 
-  constructor(private fb: FormBuilder) {
-    console.log("Constructor call");
+
+  public get formData(): FormGroup {
+    return this._formData;
   }
 
-  ngOnInit(): void {
+  set formData(formObj) {
+    debugger
+    this._formData = formObj;
+  }
+
+  constructor(private fb: FormBuilder) {
+    console.log("Constructor call");
     this.formData = this.fb.group({
       userDetails: this.fb.group({
         jobTitle: [null, Validators.required],
@@ -52,18 +56,12 @@ export class UserComponent implements OnInit {
         ]),
       }),
     });
+  }
 
-    const getUserDetails = this.formData.get("userDetails");
+  ngOnInit(): void {}
 
-    getUserDetails?.get("firstName")?.valueChanges.subscribe((data: any) => {
-      console.log("Emit");
-      
-      this.firstName.emit(data);
-    });
-    getUserDetails?.get("lastName")?.valueChanges.subscribe((data: any) => {
-      this.lastName.emit(data);
-    });
-    
+  getUserFullName(name: string) {
+    console.log("User Name::", name);
   }
 
   downloadPdf() {

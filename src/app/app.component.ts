@@ -6,15 +6,21 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class AppComponent implements OnInit {
 
+  private firstName!: string;
+  private lastName!: string;
+
+   
+
   constructor() {}
 
   ngOnInit(): void {
   }
-
+  
   getFirstName(value: any) {
-    console.log("Full Name", value);
+    this.firstName = value;
   }
   getLastName(value: any) {
-    console.log("Full Name", value);
+    this.lastName = value;
   }
+
 }

@@ -1,0 +1,16 @@
+<div class="accordion-item">
+  <h2 class="accordion-header">
+    <button
+      class="accordion-button"
+      type="button"
+      (click)="onClickAccordion($event)"
+    >
+      <span class="fw-bold">
+        <ng-content select="[accordionHeader]"></ng-content>
+      </span>
+    </button>
+  </h2>
+  <div class="accordion-collapse">
+    <ng-content select="[accordionBody]"></ng-content>
+  </div>
+</div>

@@ -5,6 +5,7 @@ import { UserBioComponent } from './user-bio/user-bio.component';
 import { CoreModule } from '../core/core.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserExperienceComponent } from './user-experience/user-experience.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -18,7 +19,8 @@ import { UserExperienceComponent } from './user-experience/user-experience.compo
     CommonModule,
     CoreModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
   ],
   exports: [UserDetailsComponent, UserBioComponent, UserExperienceComponent],
 })

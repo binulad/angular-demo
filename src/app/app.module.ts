@@ -19,7 +19,7 @@ import { UserModule } from './user/user.module';
     CoreModule,
     UserModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
