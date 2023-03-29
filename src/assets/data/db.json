@@ -3,7 +3,7 @@
     {
       "id": 1,
       "userDetails": {
-        "jobTitle": "Frontend Developer",
+        "jobTitle": 1,
         "firstName": "Binal",
         "lastName": "Lad",
         "emailAddress": "binal@1rivet.com",

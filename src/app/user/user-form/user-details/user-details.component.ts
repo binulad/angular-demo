@@ -15,13 +15,8 @@ export class UserDetailsComponent implements OnInit {
     return this._userDetailsData;
   }
   set userDetailsData(value: any) {
-    // this.userDetailsForm = new FormGroup(null);
-    console.log(value);
-    
     this.userDetailsForm.setValue(value);
-
-    console.log("this.userDetailsForm", this.userDetailsForm);
-    
+    this.getJobTitleValue(this.userDetailsForm.value.jobTitle);
   }
 
   @Output() userFullName: EventEmitter<string> = new EventEmitter();
@@ -42,6 +37,14 @@ export class UserDetailsComponent implements OnInit {
 
   clickAdditionalInfo() {
     this.editAdditionalInfo = !this.editAdditionalInfo;
+  }
+
+  getJobTitleValue(jobTitleValue: any) {
+    const jobTitleList = Constant.JOB_TITLES;
+    const getJobTitle = jobTitleList.find(
+      (element) => element.id == jobTitleValue
+    );
+    this.userDetailsForm.value.jobTitle = getJobTitle?.name;
   }
 
   onChange(event: any, inputName: string) {

@@ -1,7 +1,6 @@
 <!-- User Details Form -->
 <form [formGroup]="userDetailsForm" class="grid g-3 mb-3">
   <!-- Job Title -->
-  {{userDetailsForm.value | json}}
   <div class="g-col-12">
     <label for="jobTitle" class="form-label">Job Title</label>
     <select
@@ -109,9 +108,8 @@
   <!-- Additional Info Link -->
   <div class="g-col-12">
     <a
-      href="#"
       (click)="clickAdditionalInfo()"
-      class="font-weight-bold text-warning"
+      class="font-weight-bold text-warning cursor-pointer"
       >{{ editAdditionalInfo ? "Hide" : "Edit" }} additional info
       <span class="bi bi-chevron-down" [class.rotate]="editAdditionalInfo"></span
     ></a>
