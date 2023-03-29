@@ -6,7 +6,7 @@ import {
   FormGroupDirective,
   Validators,
 } from '@angular/forms';
-import { Constant } from '../constant/user-data';
+import { Constant } from '../../constant/user-data';
 
 @Component({
   selector: 'app-user-experience',

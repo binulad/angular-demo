@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormGroupDirective } from '@angular/forms';
-import { Constant } from '../constant/user-data';
+import { Constant } from '../../constant/user-data';
 
 @Component({
   selector: 'app-user-bio',

@@ -3,7 +3,10 @@
     <app-header [userName]="userName"
     ></app-header>
     <div class="p-4">
-      <app-user (userName)="getUserName($event)"></app-user>
+      <a class="mx-2" [routerLink]="'/home'">Home</a>
+      <a class="mx-2" [routerLink]="'/users'">User List</a>
+      <!-- <app-user (userName)="getUserName($event)"></app-user> -->
+      <router-outlet></router-outlet>
     </div>
   </section>
 </main>

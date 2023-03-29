@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormGroupDirective } from '@angular/forms';
-import { Constant } from '../constant/user-data';
+import { Constant } from '../../constant/user-data';
 
 @Component({
   selector: 'app-user-details',
@@ -11,33 +11,30 @@ export class UserDetailsComponent implements OnInit {
   @Input() formGroupName!: string;
   @Input() userDetailsForm!: FormGroup;
 
+  @Input() get userDetailsData() {
+    return this._userDetailsData;
+  }
+  set userDetailsData(value: any) {
+    // this.userDetailsForm = new FormGroup(null);
+    console.log(value);
+    
+    this.userDetailsForm.setValue(value);
+
+    console.log("this.userDetailsForm", this.userDetailsForm);
+    
+  }
+
   @Output() userFullName: EventEmitter<string> = new EventEmitter();
 
-  private _userDetailsForm!: any;
   public fullName!: any;
   public firstName!: string;
   public lastName!: string;
+  public _userDetailsData!: any;
 
   public editAdditionalInfo: boolean = false;
   public jobTitleList = Constant.JOB_TITLES;
 
-  // @Input() get userDetailsForm(): FormGroup {
-  //   return this._userDetailsForm;
-  // }
-
-  // public set userDetailsForm(formObj) {
-  //   this._userDetailsForm = formObj;
-  //   this.getFullName(this._userDetailsForm.value);
-  // }
-
-  // getFullName(obj: any) {
-  //   this.fullName = `${obj.firstName} ${obj.lastName}`;
-  //   console.log("Full Name", this.fullName);
-  //   this.userFullName.emit(this.fullName);
-  // }
-
-  constructor(private rootFormGroup: FormGroupDirective) {
-  }
+  constructor(private rootFormGroup: FormGroupDirective) {}
 
   ngOnInit(): void {
     this.userDetailsForm = this.rootFormGroup.control.get(this.formGroupName) as FormGroup;
@@ -54,9 +51,11 @@ export class UserDetailsComponent implements OnInit {
       this.lastName = event.target.value;
     }
 
-    if(this.firstName && this.lastName) {
+    if(this.firstName || this.lastName) {
       this.fullName = `${this.firstName} ${this.lastName}`
-      this.userFullName.emit(this.fullName);
+    } else {
+      this.fullName = "User Name"
     }
+    this.userFullName.emit(this.fullName);
   }
 }

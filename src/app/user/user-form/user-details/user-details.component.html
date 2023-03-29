@@ -1,6 +1,7 @@
 <!-- User Details Form -->
 <form [formGroup]="userDetailsForm" class="grid g-3 mb-3">
   <!-- Job Title -->
+  {{userDetailsForm.value | json}}
   <div class="g-col-12">
     <label for="jobTitle" class="form-label">Job Title</label>
     <select

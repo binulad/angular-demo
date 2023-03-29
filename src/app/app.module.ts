@@ -7,11 +7,15 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { UserComponent } from './user/user.component';
 import { UserModule } from './user/user.module';
+import { HttpClientModule } from '@angular/common/http';
+import { HomeComponent } from './home/home.component';
+import { HomeModule } from './home/home.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     UserComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -20,6 +24,8 @@ import { UserModule } from './user/user.module';
     UserModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
+    HomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
