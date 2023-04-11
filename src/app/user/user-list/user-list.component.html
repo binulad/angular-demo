@@ -1,0 +1,27 @@
+<div class="user-list-wrapper">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Job Title</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let user of users;">
+          <td>{{user.id}}</td>
+          <td>{{user.userDetails.firstName}} {{user.userDetails.lastName}}</td>
+          <td>{{user.userDetails.jobTitle}}</td>
+          <td>
+            <div class="d-flex align-items-center">
+              <button type="button" class="btn btn-sm btn-primary me-2" (click)="getUserDataById(user.id)">Edit</button>
+              <button type="button" class="btn btn-sm btn-danger" (click)="deleteRecord(user.id)">Delete</button>
+            </div>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+  {{getUserData | json}}
+</div>

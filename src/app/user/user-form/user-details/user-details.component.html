@@ -1,0 +1,119 @@
+<!-- User Details Form -->
+<form [formGroup]="userDetailsForm" class="grid g-3 mb-3">
+  <!-- Job Title -->
+  <div class="g-col-12">
+    <label for="jobTitle" class="form-label">Job Title</label>
+    <select
+      id="jobTitle"
+      name="jobTitle"
+      formControlName="jobTitle"
+      class="form-select"
+    >
+      <option selected>Select Job Title</option>
+      <option *ngFor="let item of jobTitleList" [value]="item.id">
+        {{ item.name }}
+      </option>
+    </select>
+  </div>
+  <!-- End: Job Title -->
+
+  <!-- First Name -->
+  <div class="g-col-6">
+    <label for="firstName" class="form-label">First Name</label>
+    <input
+      type="text"
+      name="firstName"
+      formControlName="firstName"
+      class="form-control"
+      id="firstName"
+      placeholder="Enter First Name"
+      (blur)="onChange($event, 'firstName')"
+    />
+  </div>
+  <!-- End: First Name -->
+
+  <!-- Last Name -->
+  <div class="g-col-6">
+    <label for="lastName" class="form-label">Last Name</label>
+    <input
+      type="text"
+      name="lastName"
+      formControlName="lastName"
+      class="form-control"
+      id="lastName"
+      placeholder="Enter Last Name"
+      (blur)="onChange($event, 'lastName')"
+    />
+  </div>
+  <!-- End: Last Name -->
+
+  <!-- Email Address -->
+  <div class="g-col-12">
+    <label for="emailAddress" class="form-label">Email Address</label>
+    <input
+      type="email"
+      name="emailAddress"
+      formControlName="emailAddress"
+      class="form-control"
+      id="emailAddress"
+      placeholder="Enter Email Address"
+    />
+  </div>
+  <!-- End: Email Address -->
+
+  <div class="grid g-col-12" *ngIf="editAdditionalInfo">
+    <!-- Address -->
+    <div class="g-col-12">
+      <label for="address" class="form-label">Address</label>
+      <textarea
+        name="address"
+        id="address"
+        rows="4"
+        class="form-control"
+        placeholder="Enter the Address"
+        formControlName="address"
+      ></textarea>
+    </div>
+    <!-- End: Address -->
+
+    <!-- Pin code -->
+    <div class="g-col-6">
+      <label for="pinCode" class="form-label">Pin Code</label>
+      <input
+        type="text"
+        name="pinCode"
+        class="form-control"
+        id="pinCode"
+        formControlName="pinCode"
+        placeholder="Enter Pin Code"
+      />
+    </div>
+    <!-- End: Pin code -->
+
+    <!-- Phone Number -->
+    <div class="g-col-6">
+      <label for="phoneNumber" class="form-label">Phone Number</label>
+      <input
+        type="number"
+        name="phoneNumber"
+        formControlName="phoneNumber"
+        class="form-control"
+        id="phoneNumber"
+        placeholder="Enter Phone Number"
+      />
+    </div>
+    <!-- End: Phone Number -->
+  </div>
+
+  <!-- Additional Info Link -->
+  <div class="g-col-12">
+    <a
+      (click)="clickAdditionalInfo()"
+      class="font-weight-bold text-warning cursor-pointer"
+      >{{ editAdditionalInfo ? "Hide" : "Edit" }} additional info
+      <span class="bi bi-chevron-down" [class.rotate]="editAdditionalInfo"></span
+    ></a>
+  </div>
+  <!-- End: Additional Info Link -->
+</form>
+<!-- End: User Details Form -->

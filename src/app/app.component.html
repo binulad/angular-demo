@@ -1,3 +1,12 @@
-<app-header></app-header>
-
-<router-outlet></router-outlet>
+<main class="grid gap-0 bg-light">
+  <section class="g-col-12 g-col-md-8 g-start-md-3 g-col-xl-6 g-start-xl-4 bg-white">
+    <app-header [userName]="userName"
+    ></app-header>
+    <div class="p-4">
+      <a class="mx-2" [routerLink]="'/home'">Home</a>
+      <a class="mx-2" [routerLink]="'/users'">User List</a>
+      <!-- <app-user (userName)="getUserName($event)"></app-user> -->
+      <router-outlet></router-outlet>
+    </div>
+  </section>
+</main>

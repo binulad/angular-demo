@@ -1,0 +1,7 @@
+.bi {
+  &.rotate {
+    &::before {
+      transform: rotate(180deg);
+    }
+  }
+}

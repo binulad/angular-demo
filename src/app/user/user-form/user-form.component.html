@@ -1,0 +1,24 @@
+<!-- User Details -->
+<section>
+  <app-section-header [sectionTitle]="sectionTitle"></app-section-header>
+</section>
+<!-- End: User Details -->
+<ng-container [formGroup]="formData">
+  <app-user-details formGroupName="userDetails" [userDetailsData]="userDetailsData" (userFullName)="getUserFullName($event)"></app-user-details>
+  <hr class="my-5"/>
+  <app-user-bio formGroupName="userBio"></app-user-bio>
+  <hr class="my-5"/>
+  <app-user-experience formGroupName="userExperiences"></app-user-experience>
+</ng-container>
+
+<!-- Download Resume -->
+<div class="action-area pt-4 border-top d-flex">
+  <button
+    type="button"
+    class="ms-auto btn btn-primary"
+    [class.disabled]="!formData.valid"
+    (click)="downloadPdf()"
+    >
+    Download
+  </button>
+</div>

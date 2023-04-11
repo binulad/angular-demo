@@ -1,0 +1,54 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "userDetails": {
+        "jobTitle": 1,
+        "firstName": "Binal",
+        "lastName": "Lad",
+        "emailAddress": "binal@1rivet.com",
+        "address": "Near Dhimmar Society, Grid Road, Kabilpore",
+        "pinCode": "396427",
+        "phoneNumber": "7405353046"
+      },
+      "userBio": {
+        "userDesc": "User description"
+      },
+      "userExperiences": {
+        "experiences": [
+          {
+            "jobTitle": "UI Developer",
+            "company": "1Rivet",
+            "location": "Navsari",
+            "jobDesc": "Test"
+          }
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "userDetails": {
+        "jobTitle": "UI Developer",
+        "firstName": "Binal",
+        "lastName": "Lad",
+        "emailAddress": "binal@1rivet.com",
+        "address": "Near Dhimmar Society, Grid Road, Kabilpore",
+        "pinkCode": "396427",
+        "phoneNumber": "7405353046"
+      },
+      "userBio": {
+        "userDesc": "User description"
+      },
+      "userExperiences": {
+        "experiences": [
+          {
+            "jobTitle": "UI Developer",
+            "company": "1Rivet",
+            "location": "Navsari",
+            "jobDesc": "Test"
+          }
+        ]
+      }
+    }
+  ]
+}

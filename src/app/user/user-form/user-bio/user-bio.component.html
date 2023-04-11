@@ -1,0 +1,11 @@
+<app-section-header [sectionTitle]="'Short Bio'" [shortDesc]="headerShortDesc"></app-section-header>
+<form [formGroup]="formDetails">
+  <textarea
+    name="userDesc"
+    class="form-control"
+    id="userDesc"
+    formControlName="userDesc"
+    placeholder="Write your professional overview here"
+    rows="4"
+  ></textarea>
+</form>

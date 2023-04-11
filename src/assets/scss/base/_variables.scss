@@ -1,4 +1,4 @@
-$font-family: 'Nunito', sans-serif;
+$font-family-base: 'Nunito', sans-serif;
 
 $font-weight-light: 300;
 $font-weight-normal: 400;
@@ -6,3 +6,11 @@ $font-weight-medium: 500;
 $font-weight-semibold: 600;
 $font-weight-bold: 700;
 $font-weight-extra-bold: 800;
+
+$enable-grid-classes: false;
+$enable-cssgrid: true;
+
+$input-btn-padding-x: 1rem; //.75rem;
+$input-btn-padding-y: 0.875rem; //.375rem;
+
+$warning: #ca6510;
